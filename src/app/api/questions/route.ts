@@ -9,10 +9,10 @@ export const maxDuration = 500;
 
 export async function POST(req: Request, res: Response) {
   try {
-    const { userId, getToken } = auth();
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    // const { userId } = auth();
+    // if (!userId) {
+    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // }
     const body = await req.json();
     const { amount, topic, type } = getQuestionsSchema.parse(body);
     let questions: any;

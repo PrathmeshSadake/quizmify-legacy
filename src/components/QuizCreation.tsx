@@ -79,9 +79,9 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
         setFinishedLoading(true);
         setTimeout(() => {
           if (form.getValues("type") === "mcq") {
-            router.push(`/play/mcq/${gameId}`);
+            router.push(`/mcq/${gameId}`);
           } else if (form.getValues("type") === "open_ended") {
-            router.push(`/play/open-ended/${gameId}`);
+            router.push(`/open-ended/${gameId}`);
           }
         }, 2000);
       },

@@ -36,14 +36,11 @@ export async function POST(req: Request, res: Response) {
       },
     });
 
-    const { data } = await axios.post(
-      `${process.env.API_URL as string}/api/questions`,
-      {
-        amount,
-        topic,
-        type,
-      }
-    );
+    const { data } = await axios.post(`http://localhost:3000/api/questions`, {
+      amount,
+      topic,
+      type,
+    });
 
     if (type === "mcq") {
       type mcqQuestion = {
@@ -93,6 +90,7 @@ export async function POST(req: Request, res: Response) {
 
     return NextResponse.json({ gameId: game.id }, { status: 200 });
   } catch (error) {
+    console.log(error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: error.issues },
