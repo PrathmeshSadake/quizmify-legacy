@@ -18,10 +18,6 @@ model User {
   games         Game[]
 }
 
-enum GameType {
-  mcq
-  open_ended
-}
 
 model Game {
   id          String     @id @default(cuid())
@@ -30,7 +26,7 @@ model Game {
   timeStarted DateTime
   topic       String
   timeEnded   DateTime?
-  gameType    GameType
+  gameType    String @default("mcq")
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
@@ -48,9 +44,8 @@ model Question {
   answer            String
   gameId            String
   options           Json? // for mcq questions
-  percentageCorrect Float? // for open_ended questions
   isCorrect         Boolean? // for mcq questions
-  questionType      GameType
+  questionType      String? @default("mcq")
   userAnswer        String?
 
   game Game @relation(fields: [gameId], references: [id])

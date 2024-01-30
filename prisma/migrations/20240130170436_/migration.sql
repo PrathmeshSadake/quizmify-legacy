@@ -1,10 +1,6 @@
--- CreateEnum
-CREATE TYPE "GameType" AS ENUM ('mcq', 'open_ended');
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "clerkId" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT,
     "image" TEXT,
@@ -19,7 +15,7 @@ CREATE TABLE "Game" (
     "timeStarted" TIMESTAMP(3) NOT NULL,
     "topic" TEXT NOT NULL,
     "timeEnded" TIMESTAMP(3),
-    "gameType" "GameType" NOT NULL,
+    "gameType" TEXT NOT NULL DEFAULT 'mcq',
 
     CONSTRAINT "Game_pkey" PRIMARY KEY ("id")
 );
@@ -40,9 +36,8 @@ CREATE TABLE "Question" (
     "answer" TEXT NOT NULL,
     "gameId" TEXT NOT NULL,
     "options" JSONB,
-    "percentageCorrect" DOUBLE PRECISION,
     "isCorrect" BOOLEAN,
-    "questionType" "GameType" NOT NULL,
+    "questionType" TEXT DEFAULT 'mcq',
     "userAnswer" TEXT,
 
     CONSTRAINT "Question_pkey" PRIMARY KEY ("id")
@@ -50,9 +45,6 @@ CREATE TABLE "Question" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_clerkId_key" ON "User"("clerkId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");

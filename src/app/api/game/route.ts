@@ -71,21 +71,6 @@ export async function POST(req: Request, res: Response) {
       await prisma.question.createMany({
         data: manyData,
       });
-    } else if (type === "open_ended") {
-      type openQuestion = {
-        question: string;
-        answer: string;
-      };
-      await prisma.question.createMany({
-        data: data.questions.map((question: openQuestion) => {
-          return {
-            question: question.question,
-            answer: question.answer,
-            gameId: game.id,
-            questionType: "open_ended",
-          };
-        }),
-      });
     }
 
     return NextResponse.json({ gameId: game.id }, { status: 200 });

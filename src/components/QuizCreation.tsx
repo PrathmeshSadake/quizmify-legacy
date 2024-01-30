@@ -4,7 +4,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { BookOpen, CopyCheck } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -26,7 +25,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Separator } from "./ui/separator";
 import { useToast } from "./ui/use-toast";
 import { quizCreationSchema } from "@/schemas/quiz";
 import LoadingQuestions from "./LoadingQuestions";
@@ -80,8 +78,6 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
         setTimeout(() => {
           if (form.getValues("type") === "mcq") {
             router.push(`/mcq/${gameId}`);
-          } else if (form.getValues("type") === "open_ended") {
-            router.push(`/open-ended/${gameId}`);
           }
         }, 2000);
       },
@@ -147,33 +143,6 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
                 )}
               />
 
-              <div className='flex justify-between'>
-                <Button
-                  variant={
-                    form.getValues("type") === "mcq" ? "default" : "secondary"
-                  }
-                  className='w-1/2 rounded-none rounded-l-lg'
-                  onClick={() => {
-                    form.setValue("type", "mcq");
-                  }}
-                  type='button'
-                >
-                  <CopyCheck className='w-4 h-4 mr-2' /> Multiple Choice
-                </Button>
-                <Separator orientation='vertical' />
-                <Button
-                  variant={
-                    form.getValues("type") === "open_ended"
-                      ? "default"
-                      : "secondary"
-                  }
-                  className='w-1/2 rounded-none rounded-r-lg'
-                  onClick={() => form.setValue("type", "open_ended")}
-                  type='button'
-                >
-                  <BookOpen className='w-4 h-4 mr-2' /> Open Ended
-                </Button>
-              </div>
               <Button disabled={isPending} type='submit'>
                 Submit
               </Button>

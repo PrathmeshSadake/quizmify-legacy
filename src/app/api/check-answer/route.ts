@@ -35,19 +35,6 @@ export async function POST(req: Request, res: Response) {
       return NextResponse.json({
         isCorrect,
       });
-    } else if (question.questionType === "open_ended") {
-      let percentageSimilar = stringSimilarity.compareTwoStrings(
-        question.answer.toLowerCase().trim(),
-        userInput.toLowerCase().trim()
-      );
-      percentageSimilar = Math.round(percentageSimilar * 100);
-      await prisma.question.update({
-        where: { id: questionId },
-        data: { percentageCorrect: percentageSimilar },
-      });
-      return NextResponse.json({
-        percentageSimilar,
-      });
     }
   } catch (error) {
     if (error instanceof ZodError) {

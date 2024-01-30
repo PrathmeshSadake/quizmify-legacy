@@ -22,10 +22,10 @@ const Dashboard = () => {
         <QuizMeCard />
         <HistoryCard />
       </div>
-      <div className='grid gap-4 mt-4 md:grid-cols-2 lg:grid-cols-7'>
+      {/* <div className='grid gap-4 mt-4 md:grid-cols-2 lg:grid-cols-7'>
         <HotTopicsCard />
         <RecentActivityCard />
-      </div>
+      </div> */}
     </main>
   );
 };
