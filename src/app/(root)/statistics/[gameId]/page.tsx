@@ -28,15 +28,13 @@ const Statistics = async ({ params: { gameId } }: Props) => {
 
   let accuracy: number = 0;
 
-  if (game.gameType === "mcq") {
-    let totalCorrect = game.questions.reduce((acc, question) => {
-      if (question.isCorrect) {
-        return acc + 1;
-      }
-      return acc;
-    }, 0);
-    accuracy = (totalCorrect / game.questions.length) * 100;
-  }
+  let totalCorrect = game.questions.reduce((acc, question) => {
+    if (question.isCorrect) {
+      return acc + 1;
+    }
+    return acc;
+  }, 0);
+  accuracy = (totalCorrect / game.questions.length) * 100;
 
   return (
     <>

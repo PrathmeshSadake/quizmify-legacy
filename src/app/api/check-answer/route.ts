@@ -25,17 +25,16 @@ export async function POST(req: Request, res: Response) {
       where: { id: questionId },
       data: { userAnswer: userInput },
     });
-    if (question.questionType === "mcq") {
-      const isCorrect =
-        question.answer.toLowerCase().trim() === userInput.toLowerCase().trim();
-      await prisma.question.update({
-        where: { id: questionId },
-        data: { isCorrect },
-      });
-      return NextResponse.json({
-        isCorrect,
-      });
-    }
+
+    const isCorrect =
+      question.answer.toLowerCase().trim() === userInput.toLowerCase().trim();
+    await prisma.question.update({
+      where: { id: questionId },
+      data: { isCorrect },
+    });
+    return NextResponse.json({
+      isCorrect,
+    });
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json(

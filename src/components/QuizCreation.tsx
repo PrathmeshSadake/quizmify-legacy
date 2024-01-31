@@ -43,8 +43,8 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
   const [finishedLoading, setFinishedLoading] = React.useState(false);
 
   const { mutate: getQuestions, isPending } = useMutation({
-    mutationFn: async ({ amount, topic, type }: Input) => {
-      const response = await axios.post("/api/game", { amount, topic, type });
+    mutationFn: async ({ amount, topic }: Input) => {
+      const response = await axios.post("/api/game", { amount, topic });
       return response.data;
     },
   });
@@ -53,7 +53,6 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
     resolver: zodResolver(quizCreationSchema),
     defaultValues: {
       topic: topicParam,
-      type: "mcq",
       amount: 3,
     },
   });
@@ -76,9 +75,7 @@ const QuizCreation = ({ topic: topicParam }: Props) => {
       onSuccess: ({ gameId }: { gameId: string }) => {
         setFinishedLoading(true);
         setTimeout(() => {
-          if (form.getValues("type") === "mcq") {
-            router.push(`/mcq/${gameId}`);
-          }
+          router.push(`/mcq/${gameId}`);
         }, 2000);
       },
     });

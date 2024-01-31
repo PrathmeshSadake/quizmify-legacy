@@ -26,7 +26,6 @@ model Game {
   timeStarted DateTime
   topic       String
   timeEnded   DateTime?
-  gameType    String @default("mcq")
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
@@ -43,9 +42,8 @@ model Question {
   question          String
   answer            String
   gameId            String
-  options           Json? // for mcq questions
-  isCorrect         Boolean? // for mcq questions
-  questionType      String? @default("mcq")
+  options           Json? 
+  isCorrect         Boolean? 
   userAnswer        String?
 
   game Game @relation(fields: [gameId], references: [id])

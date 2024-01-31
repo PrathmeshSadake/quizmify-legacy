@@ -9,6 +9,5 @@ export const quizCreationSchema = z.object({
     .max(50, {
       message: "Topic must be at most 50 characters long",
     }),
-  type: z.string().default("mcq"),
   amount: z.number().min(1).max(10),
 });
