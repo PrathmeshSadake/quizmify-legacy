@@ -1,8 +1,6 @@
 import DetailsDialog from "./_components/DetailsDialog";
 import QuizMeCard from "./_components/QuizMeCard";
 import HistoryCard from "./_components/HistoryCard";
-import HotTopicsCard from "./_components/HotTopicsCard";
-import RecentActivityCard from "./_components/RecentActivityCard";
 
 export const metadata = {
   title: "Dashboard | Quizmify",
